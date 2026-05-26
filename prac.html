@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LIFE IS MOVIE</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
+*{ margin:0; padding:0; box-sizing:border-box; font-family:'Noto Sans KR', sans-serif; }
+
+body{ transition: background 0.5s; }
+
+section{
+    position:relative;
+    width:100%;
+    min-height:100vh;
+    padding:80px 100px 140px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    overflow:hidden;
+}
+
+.circle{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    width:600px;
+    height:600px;
+    border-radius:0;
+    z-index:0;
+    transition:0.5s;
+    background-size:cover;
+    background-position:center;
+    pointer-events:none;
+}
+
+header{
+    position:absolute;
+    top:0; left:0;
+    width:100%;
+    padding:20px 100px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    z-index:10;
+    pointer-events:none;
+}
+header * { pointer-events:auto; }
+
+.logo{ color:#fff; font-weight:900; }
+
+header ul{ display:flex; }
+header ul li{ list-style:none; }
+header ul li a{ color:#fff; margin-left:40px; text-decoration:none; }
+
+body.comedy .logo,
+body.comedy header ul li a { color:#222; }
+
+.textBox{
+    position:relative;
+    z-index:5;
+    pointer-events:auto;
+}
+.textBox h2{ font-size:3.8em; line-height:1.2; color:#fff; }
+.textBox span{ font-weight:900; }
+.textBox p{ color:#aaa; margin-top:5px; }
+.textBox a{
+    display:inline-block;
+    margin-top:15px;
+    padding:10px 25px;
+    background:#fff;
+    color:#111;
+    border-radius:40px;
+    text-decoration:none;
+}
+
+body.comedy .textBox h2,
+body.comedy .textBox p { color:#222; }
+
+.imgBox{
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%, -50%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+    z-index:2;
+    pointer-events:none;
+}
+.imgBox img{ transition:0.5s; }
+
+.movie-title{ text-align:center; }
+.movie-title .title-main{
+    font-size:1.05em; font-weight:700;
+    color:#fff; display:block; letter-spacing:0.02em;
+}
+.movie-title .title-sub{
+    font-size:0.72em; color:rgba(255,255,255,0.5);
+    margin-top:3px; display:block; letter-spacing:0.04em;
+}
+body.comedy .movie-title .title-main { color:#222; }
+body.comedy .movie-title .title-sub  { color:rgba(0,0,0,0.4); }
+
+.rating-panel{
+    position:relative;
+    z-index:5;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
+    min-width:160px;
+    pointer-events:auto;
+}
+.rating-question{ color:#fff; font-size:1em; font-weight:600; text-align:center; }
+body.comedy .rating-question { color:#222; }
+
+.stars{ display:flex; gap:8px; }
+.stars svg{ width:32px; height:32px; cursor:pointer; transition:transform 0.15s; }
+.stars svg:hover{ transform:scale(1.2); }
+.star-path{ fill:none; stroke:#fff; stroke-width:1.5; transition:fill 0.2s, stroke 0.2s; }
+body.comedy .star-path { stroke:#555; }
+.stars svg.hovered .star-path,
+.stars svg.selected .star-path { fill:#FFD700; stroke:#FFD700; }
+
+.rating-score{ color:#aaa; font-size:0.8em; min-height:18px; }
+body.comedy .rating-score { color:#777; }
+
+.imdb-badge{
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:8px; padding:8px 18px; text-align:center;
+}
+body.comedy .imdb-badge{
+    background:rgba(0,0,0,0.06);
+    border-color:rgba(0,0,0,0.12);
+}
+.imdb-label{ color:#aaa; font-size:0.72em; letter-spacing:0.1em; }
+.imdb-val  { color:#fff; font-size:1.3em; font-weight:700; }
+body.comedy .imdb-label { color:#777; }
+body.comedy .imdb-val   { color:#222; }
+
+a.imdb-badge{
+    text-decoration:none;
+    cursor:pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+a.imdb-badge:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 18px rgba(255,255,255,0.15);
+}
+.now-playing{ color:#aaa; font-size:0.75em; letter-spacing:0.08em; }
+body.comedy .now-playing { color:#777; }
+
+.review-form{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    width:100%;
+}
+
+.review-form-row{
+    display:flex;
+    gap:6px;
+    width:100%;
+}
+
+.review-nick{
+    width:100%;
+    padding:7px 12px;
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,0.2);
+    background:rgba(255,255,255,0.07);
+    color:#fff;
+    font-size:0.78em;
+    outline:none;
+}
+
+.review-nick::placeholder{ color:rgba(255,255,255,0.35); }
+
+body.comedy .review-nick{
+    border-color:rgba(0,0,0,0.2);
+    background:rgba(0,0,0,0.06);
+    color:#222;
+}
+body.comedy .review-nick::placeholder{ color:rgba(0,0,0,0.3); }
+.review-input{
+    flex:1; padding:7px 12px;
+    border-radius:20px;
+    border:1px solid rgba(255,255,255,0.2);
+    background:rgba(255,255,255,0.07);
+    color:#fff; font-size:0.78em; outline:none;
+}
+.review-input::placeholder{ color:rgba(255,255,255,0.35); }
+body.comedy .review-input{
+    border-color:rgba(0,0,0,0.2);
+    background:rgba(0,0,0,0.06);
+    color:#222;
+}
+body.comedy .review-input::placeholder { color:rgba(0,0,0,0.3); }
+
+.review-btn{
+    padding:7px 14px; border-radius:20px; border:none;
+    background:#fff; color:#111;
+    font-size:0.78em; font-weight:700; cursor:pointer; white-space:nowrap;
+}
+body.comedy .review-btn { background:#222; color:#fff; }
+
+.review-list{
+    width:100%;
+    display:flex; flex-direction:column; gap:6px;
+    max-height:130px; overflow-y:auto;
+}
+.review-list::-webkit-scrollbar{ width:3px; }
+.review-list::-webkit-scrollbar-thumb{ background:rgba(255,255,255,0.2); border-radius:3px; }
+
+.review-item{
+    background:rgba(255,255,255,0.07);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:10px; padding:7px 10px;
+    animation: reviewIn 0.3s ease;
+}
+body.comedy .review-item{
+    background:rgba(0,0,0,0.05);
+    border-color:rgba(0,0,0,0.1);
+}
+@keyframes reviewIn{
+    from{ opacity:0; transform:translateY(5px); }
+    to{   opacity:1; transform:translateY(0); }
+}
+.review-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:3px;
+}
+.review-nick-label{
+    font-size:0.75em;
+    font-weight:700;
+    color:rgba(255,255,255,0.8);
+}
+body.comedy .review-nick-label{ color:rgba(0,0,0,0.6); }
+.review-stars{ font-size:0.7em; color:#FFD700; }
+.review-text { font-size:0.78em; color:#ddd; word-break:break-all; }
+body.comedy .review-text { color:#444; }
+
+.thumb{
+    position:fixed;
+    bottom:28px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    align-items:flex-end;
+    gap:20px;
+    z-index:9999;
+    pointer-events:auto;
+}
+.thumb li{ list-style:none; cursor:pointer; }
+.thumb li img{
+    width:auto;
+    height:90px;
+    display:block;
+    transition:0.3s;
+    border-radius:6px;
+}
+.thumb li:hover img{ transform:translateY(-8px); }
+.thumb li.active img{
+    transform:scale(1.1);
+    border:2px solid #fff;
+    border-radius:10px;
+}
+body.comedy .thumb li.active img { border-color:#222; }
+
+body.action { background:#000; }
+body.action .circle{
+    background-image:url('./imgs/explode.png');
+    background-size:cover; background-position:center;
+}
+body.action .imgBox img{ width:420px; filter:contrast(130%) saturate(140%); margin-bottom:60px; }
+body.action .movie-title{ margin-top:60px; }
+body.action .textBox span{ color:#ff2e2e; }
+
+body.comedy { background:#f4f1ea; }
+body.comedy .circle{
+    background-image:url('./imgs/popart.png');
+    background-size:cover; background-position:center;
+}
+body.comedy .imgBox img{ width:460px; filter:saturate(110%) brightness(105%); }
+
+body.romance { background:#1a001a; }
+body.romance .circle{
+    background-image:url('./imgs/heart.png');
+    background-size:cover; background-position:center;
+    opacity:0.85;
+}
+body.romance .imgBox img{ width:480px; filter:brightness(110%) blur(1px); }
+body.romance .textBox span{ color:#ff7aa8; }
+
+body.sf { background:#0a0e2a; }
+body.sf .circle{
+    background-image:url('./imgs/moon.png');
+    background-size:cover; background-position:center;
+    width:600px; height:600px;
+}
+body.sf .imgBox img{
+    width:340px;
+    filter:brightness(110%) contrast(110%);
+    animation:float 4s ease-in-out infinite;
+}
+@keyframes float{
+    0%   { transform:translateY(0px) rotate(0deg); }
+    30%  { transform:translateY(-18px) rotate(1.5deg); }
+    60%  { transform:translateY(-10px) rotate(-1deg); }
+    100% { transform:translateY(0px) rotate(0deg); }
+}
+body.action .imgBox img,
+body.comedy .imgBox img,
+body.romance .imgBox img { animation:none; }
+body.sf .textBox span { color:#7ec8e3; }
+body.sf .movie-title .title-main { color:#fff; }
+body.sf .movie-title .title-sub  { color:rgba(255,255,255,0.5); }
+</style>
+</head>
+
+<body class="action">
+<section>
+
+    <div class="circle"></div>
+
+    <header>
+        <div class="logo">🤠💥 ACTION</div>
+        <ul>
+            <li><a href="#">현재 상영 중인 영화</a></li>
+            <li><a href="#">장르별 영화</a></li>
+            <li><a href="#">리뷰</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </header>
+
+    <!-- 좌측 텍스트 -->
+    <div class="textBox">
+        <h2>폭발하는<br><span>한 장면</span></h2>
+        <p>극도의 긴장감. 빠른 편집. 순수한 아드레날린.</p>
+        <a href="https://www.wavve.com/player/movie?movieid=MV_CQ01_PT0000011388" id="watchBtn" target="_blank">보러 가기</a>
+    </div>
+
+    <!-- 중앙 이미지 -->
+    <div class="imgBox">
+        <div class="movie-title">
+            <span class="title-main">내일을 향해 쏴라</span>
+            <span class="title-sub">1970 · 조지 로이 힐</span>
+        </div>
+        <img src="./imgs/action.png" class="poster">
+    </div>
+
+    <!-- 우측 별점 패널 -->
+    <div class="rating-panel">
+        <div class="rating-question">영화를 보셨나요?</div>
+        <div class="stars" id="stars">
+            <svg viewBox="0 0 24 24" data-index="1"><path class="star-path" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" data-index="2"><path class="star-path" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" data-index="3"><path class="star-path" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" data-index="4"><path class="star-path" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            <svg viewBox="0 0 24 24" data-index="5"><path class="star-path" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <div class="rating-score" id="ratingScore"></div>
+        <a class="imdb-badge" id="imdbBadge" href="https://www.imdb.com/title/tt9603212/?ref_=nm_flmg_job_1_accord_2_cdt_c_2" target="_blank">
+            <div class="imdb-label">IMDB</div>
+            <div class="imdb-val" id="imdbVal">7.6</div>
+        </a>
+        <div class="now-playing">절찬상영중</div>
+        <div class="review-form">
+            <input class="review-nick" id="reviewNick" type="text" placeholder="닉네임">
+            <div class="review-form-row">
+                <input class="review-input review-text-input" id="reviewInput" type="text" placeholder="한 줄 리뷰를 남겨보세요...">
+                <button class="review-btn" onclick="submitReview()">등록</button>
+            </div>
+        </div>
+        <div class="review-list" id="reviewList"></div>
+    </div>
+
+</section>
+
+<ul class="thumb">
+    <li class="active" onclick="setGenre(event,'action','./imgs/action.png','폭발하는<br><span>한 장면</span>','극도의 긴장감. 빠른 편집. 순수한 아드레날린.')">
+        <img src="./imgs/action.png">
+    </li>
+    <li onclick="setGenre(event,'comedy','./imgs/comedy.png','예측 불가한<br><span>웃음</span>','엉뚱한 순간들, 가볍고 리듬감 있는 전개.')">
+        <img src="./imgs/comedy.png">
+    </li>
+    <li onclick="setGenre(event,'romance','./imgs/romance.png','마음에 남는<br><span>사랑</span>','따뜻한 순간들, 잔잔하게 깊어지는 감정.')">
+        <img src="./imgs/romance.png">
+    </li>
+    <li onclick="setGenre(event,'sf','./imgs/sf.png','현실을 벗어난<br><span>가능성</span>','과학으로 펼쳐지는 또 다른 세계.')">
+        <img src="./imgs/sf.png">
+    </li>
+</ul>
+
+<script>
+
+const starsEl = document.querySelectorAll('#stars svg');
+const scoreEl = document.getElementById('ratingScore');
+const labels  = ['','별로예요','그저 그래요','좋았어요','훌륭해요','최고예요!'];
+let selected  = 0;
+
+starsEl.forEach(star => {
+    star.addEventListener('mouseenter', () => {
+        const idx = parseInt(star.dataset.index);
+        starsEl.forEach(s => {
+            s.classList.toggle('hovered', parseInt(s.dataset.index) <= idx);
+            s.classList.remove('selected');
+        });
+        scoreEl.textContent = labels[idx];
+    });
+    star.addEventListener('click', () => {
+        selected = parseInt(star.dataset.index);
+        starsEl.forEach(s => {
+            s.classList.toggle('selected', parseInt(s.dataset.index) <= selected);
+            s.classList.remove('hovered');
+        });
+        scoreEl.textContent = labels[selected];
+    });
+});
+document.getElementById('stars').addEventListener('mouseleave', () => {
+    starsEl.forEach(s => {
+        s.classList.remove('hovered');
+        s.classList.toggle('selected', parseInt(s.dataset.index) <= selected);
+    });
+    scoreEl.textContent = selected ? labels[selected] : '';
+});
+
+function submitReview() {
+    const input = document.getElementById('reviewInput');
+    const nickEl = document.getElementById('reviewNick');
+    const text  = input.value.trim();
+    if (!text) return;
+    const nick  = nickEl.value.trim() || '익명';
+    const list  = document.getElementById('reviewList');
+    const stars = selected > 0 ? '★'.repeat(selected) + '☆'.repeat(5 - selected) : '☆☆☆☆☆';
+    const item  = document.createElement('div');
+    item.className = 'review-item';
+    item.innerHTML = `
+        <div class="review-header">
+            <span class="review-nick-label">${nick}</span>
+            <span class="review-stars">${stars}</span>
+        </div>
+        <div class="review-text">${text}</div>
+    `;
+    list.prepend(item);
+    input.value = '';
+}
+document.getElementById('reviewInput').addEventListener('keydown', e => {
+    if (e.key === 'Enter') submitReview();
+});
+
+const genreData = {
+    action:  {
+        logo:'🤠💥 ACTION',  titleMain:'미션 임파서블: 데드 레코닝',     titleSub:'2023 · 크리스토퍼 맥쿼리',
+        link:'https://www.wavve.com/player/movie?movieid=MV_CQ01_PT0000011388',
+        imdb:'7.6', imdbLink:'https://www.imdb.com/title/tt9603212/?ref_=nm_flmg_job_1_accord_2_cdt_c_2',
+        sampleReview: { nick:'이동진', stars:4, text:'예상하지 못한 액션은 거의 없지만 단계마다 그렇게 끝까지 밀어붙이는 액션도 거의 없을 것이다.' }
+    },
+    comedy:  {
+        logo:'😂🎭 COMEDY',  titleMain:'미스터 빈의 홀리데이', titleSub:'2007 · 스티븐 벤디렉',
+        link:'https://www.wavve.com/player/movie?movieid=MV_CG01_NU0000011237',
+        imdb:'6.4', imdbLink:'https://www.imdb.com/title/tt0453451/?ref_=nv_sr_srsg_6_tt_5_nm_3_in_0_q_mr.bean',
+        sampleReview: { nick:'이동진', stars:3, text:'미스터 빈을 위한 최적의 시-공간적 설정.' }
+    },
+    romance: {
+        logo:'💕🌸 ROMANCE', titleMain:'노트북',           titleSub:'2004 · 닉 카세베츠',
+        link:'https://www.coupangplay.com/content/0ca924cb-9872-4833-a0aa-196277616102',
+        imdb:'7.8', imdbLink:'https://www.imdb.com/title/tt0332280/?ref_=fn_t_1',
+        sampleReview: { nick:'씨네만세', stars:5, text:'온 마음을 다해 사랑했고, 또 사랑받았다면, 그보다 성공한 인생이 있을까요?' }
+    },
+    sf:      {
+        logo:'🚀🌌 SF',      titleMain:'인터스텔라',            titleSub:'2014 · 크리스토퍼 놀란',
+        link:'https://www.coupangplay.com/content/6e342bf8-ffc6-4fb3-95a2-e0856b882748',
+        imdb:'8.7', imdbLink:'https://www.imdb.com/title/tt0816692/?ref_=nv_sr_srsg_1_tt_6_nm_1_in_0_q_inter',
+        sampleReview: { nick:'강아지똥', stars:5, text:'미친 영화. 살면서 이런 천재의 영화를 볼 수 있다니 행운이다. 3시간동안 난 미래에 있었다' }
+    }
+};
+
+/* ── 예시 리뷰 렌더링 ── */
+function renderSampleReview(genre) {
+    const list = document.getElementById('reviewList');
+    list.innerHTML = '';
+    const s = genreData[genre].sampleReview;
+    const stars = '★'.repeat(s.stars) + '☆'.repeat(5 - s.stars);
+    const item  = document.createElement('div');
+    item.className = 'review-item sample';
+    item.innerHTML = `
+        <div class="review-header">
+            <span class="review-nick-label">${s.nick}</span>
+            <span class="review-stars">${stars}</span>
+        </div>
+        <div class="review-text">${s.text}</div>
+    `;
+    list.appendChild(item);
+}
+
+// 초기 로드 시 액션 예시 리뷰 표시
+renderSampleReview('action');
+
+/* ── 장르 전환 ── */
+function setGenre(e, genre, img, title, desc) {
+    document.body.className = genre;
+    document.querySelector('.poster').src = img;
+    document.querySelector('.textBox h2').innerHTML = title;
+    document.querySelector('.textBox p').innerText  = desc;
+    document.querySelector('.logo').textContent     = genreData[genre].logo;
+    document.querySelector('.movie-title .title-main').textContent = genreData[genre].titleMain;
+    document.querySelector('.movie-title .title-sub').textContent  = genreData[genre].titleSub;
+    document.getElementById('watchBtn').href  = genreData[genre].link;
+    document.getElementById('imdbVal').textContent = genreData[genre].imdb;
+    document.getElementById('imdbBadge').href = genreData[genre].imdbLink;
+    document.querySelectorAll('.thumb li').forEach(li => li.classList.remove('active'));
+    e.currentTarget.classList.add('active');
+    selected = 0;
+    starsEl.forEach(s => s.classList.remove('selected','hovered'));
+    scoreEl.textContent = '';
+    renderSampleReview(genre);
+}
+</script>
+</body>
+</html>

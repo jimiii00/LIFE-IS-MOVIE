@@ -259,6 +259,12 @@ body.comedy .review-text { color:#444; }
     gap:20px;
     z-index:9999;
     pointer-events:auto;
+    background:rgba(0,0,0,0.45);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    border:0.5px solid rgba(255,255,255,0.1);
+    border-radius:16px;
+    padding:10px 24px;
 }
 .thumb li{ list-style:none; cursor:pointer; }
 .thumb li img{
@@ -324,6 +330,272 @@ body.romance .imgBox img { animation:none; }
 body.sf .textBox span { color:#7ec8e3; }
 body.sf .movie-title .title-main { color:#fff; }
 body.sf .movie-title .title-sub  { color:rgba(255,255,255,0.5); }
+/* ── 두 번째 섹션 ── */
+.section2{
+    width:100%;
+    min-height:100vh;
+    padding:60px 100px;
+    background:#0d0d0d;
+    transition: background 0.5s;
+}
+
+body.comedy .section2 { background:#edeae3; }
+body.romance .section2 { background:#130010; }
+body.sf .section2 { background:#07091f; }
+
+.s2-header{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    padding-bottom:28px;
+    border-bottom:0.5px solid rgba(255,255,255,0.07);
+    margin-bottom:36px;
+}
+body.comedy .s2-header { border-bottom-color:rgba(0,0,0,0.08); }
+
+.s2-title{
+    font-size:30px;
+    font-weight:700;
+    color:#fff;
+    margin:0 0 10px;
+}
+body.comedy .s2-title { color:#222; }
+
+.s2-tags{ display:flex; gap:8px; flex-wrap:wrap; }
+.s2-tag{
+    font-size:12px;
+    border-radius:20px;
+    padding:4px 14px;
+    border:0.5px solid;
+}
+
+.s2-meta{ display:flex; gap:24px; align-items:center; }
+.s2-meta-item{ text-align:center; }
+.s2-meta-label{
+    font-size:10px;
+    color:#555;
+    letter-spacing:0.1em;
+    margin:0 0 4px;
+}
+body.comedy .s2-meta-label { color:#999; }
+.s2-meta-val{
+    font-size:20px;
+    font-weight:500;
+    color:#fff;
+    margin:0;
+}
+body.comedy .s2-meta-val { color:#222; }
+.s2-divider{
+    width:0.5px;
+    height:36px;
+    background:rgba(255,255,255,0.08);
+}
+body.comedy .s2-divider { background:rgba(0,0,0,0.1); }
+
+.s2-main{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+    margin-bottom:40px;
+}
+
+.s2-left{ display:flex; flex-direction:column; gap:20px; }
+
+.s2-trailer{
+    background:#000;
+    border-radius:12px;
+    aspect-ratio:16/7;
+    overflow:hidden;
+    border:0.5px solid rgba(255,255,255,0.08);
+}
+.s2-trailer iframe{
+    width:100%;
+    height:100%;
+    border:none;
+    display:block;
+}
+
+.s2-synopsis{
+    background:rgba(255,255,255,0.03);
+    border:0.5px solid rgba(255,255,255,0.07);
+    border-radius:12px;
+    padding:20px 24px;
+}
+body.comedy .s2-synopsis{
+    background:rgba(0,0,0,0.04);
+    border-color:rgba(0,0,0,0.08);
+}
+.s2-section-label{
+    font-size:14px;
+    font-weight:600;
+    color:#aaa;
+    letter-spacing:0.05em;
+    margin:0 0 10px;
+}
+body.comedy .s2-section-label { color:#777; }
+.s2-synopsis p{
+    font-size:14px;
+    color:#999;
+    line-height:1.8;
+    margin:0;
+}
+body.comedy .s2-synopsis p { color:#555; }
+
+.s2-stills{ display:flex; flex-direction:column; gap:10px; }
+.s2-stills-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:8px;
+}
+.s2-still{
+    aspect-ratio:16/9;
+    border-radius:8px;
+    overflow:hidden;
+    background:rgba(255,255,255,0.04);
+    border:0.5px solid rgba(255,255,255,0.07);
+}
+body.comedy .s2-still{
+    background:rgba(0,0,0,0.05);
+    border-color:rgba(0,0,0,0.08);
+}
+.s2-still img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+.s2-still-placeholder{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#333;
+    font-size:22px;
+}
+
+.s2-right{ display:flex; flex-direction:column; gap:20px; }
+
+.s2-cast{
+    background:rgba(255,255,255,0.03);
+    border:0.5px solid rgba(255,255,255,0.07);
+    border-radius:12px;
+    padding:20px 24px;
+    flex:1;
+}
+body.comedy .s2-cast{
+    background:rgba(0,0,0,0.04);
+    border-color:rgba(0,0,0,0.08);
+}
+.s2-cast-list{ display:flex; flex-direction:column; gap:14px; }
+.s2-cast-item{ display:flex; align-items:center; gap:12px; }
+.s2-cast-avatar{
+    width:40px; height:40px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    font-size:12px;
+    font-weight:700;
+}
+.s2-cast-name{ font-size:13px; font-weight:500; color:#ddd; margin:0 0 2px; }
+body.comedy .s2-cast-name { color:#333; }
+.s2-cast-role{ font-size:11px; color:#555; margin:0; }
+
+/* ── 음소거 버튼 ── */
+.mute-btn{
+    position:fixed;
+    top:22px;
+    right:24px;
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.1);
+    border:1px solid rgba(255,255,255,0.2);
+    font-size:16px;
+    cursor:pointer;
+    z-index:9999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:background 0.2s;
+}
+.mute-btn:hover{ background:rgba(255,255,255,0.2); }
+body.comedy .mute-btn{
+    background:rgba(0,0,0,0.08);
+    border-color:rgba(0,0,0,0.15);
+}
+.scroll-arrow{
+    position:fixed;
+    bottom:160px;
+    left:50%;
+    transform:translateX(-50%);
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.1);
+    border:1px solid rgba(255,255,255,0.2);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    z-index:999;
+    transition:background 0.2s, transform 0.2s, opacity 0.3s;
+    animation:arrowBounce 1.8s ease-in-out infinite;
+    text-decoration:none;
+}
+.scroll-arrow:hover{
+    background:rgba(255,255,255,0.2);
+    animation:none;
+    transform:translateX(-50%) translateY(-3px);
+}
+.scroll-arrow svg{
+    width:20px;
+    height:20px;
+    stroke:#fff;
+    fill:none;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+body.comedy .scroll-arrow{
+    background:rgba(0,0,0,0.08);
+    border-color:rgba(0,0,0,0.15);
+}
+body.comedy .scroll-arrow svg{ stroke:#222; }
+
+@keyframes arrowBounce{
+    0%, 100%{ transform:translateX(-50%) translateY(0); }
+    50%      { transform:translateX(-50%) translateY(7px); }
+}
+.s2-rec-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+    margin-top:10px;
+}
+.s2-rec-card{
+    background:rgba(255,255,255,0.03);
+    border:0.5px solid rgba(255,255,255,0.07);
+    border-radius:12px;
+    overflow:hidden;
+    cursor:pointer;
+    transition:transform 0.2s, border-color 0.2s;
+}
+body.comedy .s2-rec-card{
+    background:rgba(0,0,0,0.04);
+    border-color:rgba(0,0,0,0.08);
+}
+.s2-rec-card:hover{ transform:translateY(-4px); }
+.s2-rec-poster{
+    aspect-ratio:16/9;
+    background:rgba(255,255,255,0.04);
+    display:flex; align-items:center; justify-content:center;
+    font-size:20px;
+}
+.s2-rec-info{ padding:8px 10px; }
+.s2-rec-title{ font-size:12px; color:#ccc; margin:0 0 2px; font-weight:500; }
+body.comedy .s2-rec-title { color:#333; }
+.s2-rec-sub{ font-size:10px; color:#555; margin:0; }
 </style>
 </head>
 
@@ -386,6 +658,14 @@ body.sf .movie-title .title-sub  { color:rgba(255,255,255,0.5); }
 
 </section>
 
+<!-- 음소거 버튼 -->
+<button class="mute-btn" id="muteBtn">🔊</button>
+
+<!-- 플로팅 화살표 -->
+<a class="scroll-arrow" onclick="document.getElementById('section2').scrollIntoView({behavior:'smooth'})">
+    <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+</a>
+
 <ul class="thumb">
     <li class="active" onclick="setGenre(event,'action','./imgs/action.png','폭발하는<br><span>한 장면</span>','극도의 긴장감. 빠른 편집. 순수한 아드레날린.')">
         <img src="./imgs/action.png">
@@ -402,6 +682,43 @@ body.sf .movie-title .title-sub  { color:rgba(255,255,255,0.5); }
 </ul>
 
 <script>
+
+/* ── BGM ── */
+const bgm = new Audio('./music/action.mp3');
+bgm.loop   = true;
+bgm.volume = 0.3;
+
+const bgmFiles = {
+    action:  './music/action.mp3',
+    comedy:  './music/comedy.mp3',
+    romance: './music/romance.mp3',
+    sf:      './music/sf.mp3'
+};
+
+function playBGM(genre) {
+    const newSrc = bgmFiles[genre];
+    if (bgm.src.endsWith(newSrc.replace('./', '/'))) return;
+    bgm.pause();
+    bgm.src  = newSrc;
+    bgm.load();
+    bgm.play().catch(() => {});
+}
+
+// 페이지 로드 시 자동재생 — 브라우저 정책상 첫 클릭 이후 재생됨
+document.addEventListener('click', () => {
+    if (bgm.paused) bgm.play().catch(() => {});
+}, { once: true });
+
+bgm.play().catch(() => {
+    // 자동재생 막힌 경우 첫 클릭 때 재생
+});
+
+/* ── 음소거 버튼 ── */
+const muteBtn = document.getElementById('muteBtn');
+muteBtn.addEventListener('click', () => {
+    bgm.muted = !bgm.muted;
+    muteBtn.textContent = bgm.muted ? '🔇' : '🔊';
+});
 
 const starsEl = document.querySelectorAll('#stars svg');
 const scoreEl = document.getElementById('ratingScore');
@@ -459,29 +776,45 @@ document.getElementById('reviewInput').addEventListener('keydown', e => {
 });
 
 const genreData = {
-    action:  {
-        logo:'🤠💥 ACTION',  titleMain:'미션 임파서블: 데드 레코닝',     titleSub:'2023 · 크리스토퍼 맥쿼리',
+    action: {
+        logo:'🤠💥 ACTION', titleMain:'미션 임파서블: 데드 레코닝', titleSub:'2023 · 크리스토퍼 맥쿼리',
         link:'https://www.wavve.com/player/movie?movieid=MV_CQ01_PT0000011388',
-        imdb:'7.6', imdbLink:'https://www.imdb.com/title/tt9603212/?ref_=nm_flmg_job_1_accord_2_cdt_c_2',
-        sampleReview: { nick:'이동진', stars:4, text:'예상하지 못한 액션은 거의 없지만 단계마다 그렇게 끝까지 밀어붙이는 액션도 거의 없을 것이다.' }
+        imdb:'7.6', imdbLink:'https://www.imdb.com/title/tt9603212/',
+        sampleReview:{ nick:'이동진', stars:4, text:'예상하지 못한 액션은 거의 없지만 단계마다 그렇게 끝까지 밀어붙이는 액션도 거의 없을 것이다.' },
+        s2:{ title:'미션 임파서블: 데드 레코닝', tags:[{text:'액션'},{text:'스릴러'},{text:'어드벤처'}], tagColor:'#ff2e2e', tagBg:'rgba(255,46,46,0.1)', tagBorder:'rgba(255,46,46,0.4)', runtime:'163분', release:'2023.07', rating:'12세', trailer:'F40MAXyXaac', synopsis:'에단 헌트는 인류의 미래를 위협하는 강력한 무기를 손에 넣기 위해 전 세계를 누빈다. 그를 둘러싼 모든 것이 위험에 처하게 되고, 세계 각국의 요원들과 치열한 사투를 벌인다.',
+            cast:[{init:'TC',name:'톰 크루즈',role:'에단 헌트 역'},{init:'HA',name:'헤일리 앳웰',role:'그레이스 역'},{init:'VR',name:'빙 래임즈',role:'루서 스티켈 역'},{init:'SP',name:'사이먼 페그',role:'벤지 던 역'}],
+            castColor:'#ff2e2e', castBg:'rgba(255,46,46,0.15)',
+            rec:[{emoji:'🏍️',title:'탑건: 매버릭',sub:'2022 · 액션'},{emoji:'🔫',title:'존 윅 4',sub:'2023 · 액션'},{emoji:'💣',title:'오펜하이머',sub:'2023 · 드라마'},{emoji:'🕵️',title:'007 노 타임 투 다이',sub:'2021 · 액션'}]}
     },
-    comedy:  {
-        logo:'😂🎭 COMEDY',  titleMain:'미스터 빈의 홀리데이', titleSub:'2007 · 스티븐 벤디렉',
+    comedy: {
+        logo:'😂🎭 COMEDY', titleMain:'미스터 빈의 홀리데이', titleSub:'2007 · 스티븐 벤디렉',
         link:'https://www.wavve.com/player/movie?movieid=MV_CG01_NU0000011237',
-        imdb:'6.4', imdbLink:'https://www.imdb.com/title/tt0453451/?ref_=nv_sr_srsg_6_tt_5_nm_3_in_0_q_mr.bean',
-        sampleReview: { nick:'이동진', stars:3, text:'미스터 빈을 위한 최적의 시-공간적 설정.' }
+        imdb:'6.4', imdbLink:'https://www.imdb.com/title/tt0453451/',
+        sampleReview:{ nick:'이동진', stars:3, text:'미스터 빈을 위한 최적의 시-공간적 설정.' },
+        s2:{ title:'미스터 빈의 홀리데이', tags:[{text:'코미디'},{text:'가족'},{text:'어드벤처'}], tagColor:'#b07d2a', tagBg:'rgba(176,125,42,0.1)', tagBorder:'rgba(176,125,42,0.4)', runtime:'90분', release:'2007.03', rating:'전체', trailer:'hSxLUd8aly4', synopsis:'어리숙하지만 사랑스러운 미스터 빈이 칸 영화제를 향한 엉뚱한 여행을 떠난다. 기차를 타고 파리를 거쳐 칸으로 가는 여정에서 온갖 해프닝이 벌어진다.',
+            cast:[{init:'RA',name:'로완 앳킨슨',role:'미스터 빈 역'},{init:'WL',name:'윌렘 대포',role:'카슨 클레이 역'},{init:'JH',name:'장 로슈포르',role:'에밀 역'},{init:'MC',name:'막스 보닐',role:'스테판 역'}],
+            castColor:'#b07d2a', castBg:'rgba(176,125,42,0.15)',
+            rec:[{emoji:'😄',title:'나홀로 집에',sub:'1990 · 코미디'},{emoji:'🎪',title:'박물관이 살아있다',sub:'2006 · 코미디'},{emoji:'🐧',title:'펭귄을 날려라',sub:'2011 · 코미디'},{emoji:'🤡',title:'패딩턴',sub:'2014 · 가족'}]}
     },
     romance: {
-        logo:'💕🌸 ROMANCE', titleMain:'노트북',           titleSub:'2004 · 닉 카세베츠',
+        logo:'💕🌸 ROMANCE', titleMain:'노트북', titleSub:'2004 · 닉 카세베츠',
         link:'https://www.coupangplay.com/content/0ca924cb-9872-4833-a0aa-196277616102',
-        imdb:'7.8', imdbLink:'https://www.imdb.com/title/tt0332280/?ref_=fn_t_1',
-        sampleReview: { nick:'씨네만세', stars:5, text:'온 마음을 다해 사랑했고, 또 사랑받았다면, 그보다 성공한 인생이 있을까요?' }
+        imdb:'7.8', imdbLink:'https://www.imdb.com/title/tt0332280/',
+        sampleReview:{ nick:'씨네만세', stars:5, text:'온 마음을 다해 사랑했고, 또 사랑받았다면, 그보다 성공한 인생이 있을까요?' },
+        s2:{ title:'노트북', tags:[{text:'로맨스'},{text:'드라마'}], tagColor:'#ff7aa8', tagBg:'rgba(255,122,168,0.1)', tagBorder:'rgba(255,122,168,0.4)', runtime:'123분', release:'2004.06', rating:'12세', trailer:'dyuvMHc-vYc', synopsis:'1940년대 여름, 가난한 청년 노아와 부유한 집안의 앨리가 뜨거운 사랑에 빠진다. 하지만 신분 차이로 인해 헤어지게 되고, 수십 년 후 노인 요양원에서 한 남자가 노트북에 적힌 이야기를 읽어준다.',
+            cast:[{init:'RG',name:'라이언 고슬링',role:'노아 역'},{init:'RW',name:'레이첼 맥아담스',role:'앨리 역'},{init:'JG',name:'제임스 가너',role:'노년 노아 역'},{init:'GR',name:'진 스마트',role:'앤 해밀턴 역'}],
+            castColor:'#ff7aa8', castBg:'rgba(255,122,168,0.15)',
+            rec:[{emoji:'💌',title:'어바웃 타임',sub:'2013 · 로맨스'},{emoji:'🌹',title:'라라랜드',sub:'2016 · 로맨스'},{emoji:'🌊',title:'비포 선라이즈',sub:'1995 · 로맨스'},{emoji:'💍',title:'프로포즈',sub:'2009 · 로맨스'}]}
     },
-    sf:      {
-        logo:'🚀🌌 SF',      titleMain:'인터스텔라',            titleSub:'2014 · 크리스토퍼 놀란',
+    sf: {
+        logo:'🚀🌌 SF', titleMain:'인터스텔라', titleSub:'2014 · 크리스토퍼 놀란',
         link:'https://www.coupangplay.com/content/6e342bf8-ffc6-4fb3-95a2-e0856b882748',
-        imdb:'8.7', imdbLink:'https://www.imdb.com/title/tt0816692/?ref_=nv_sr_srsg_1_tt_6_nm_1_in_0_q_inter',
-        sampleReview: { nick:'강아지똥', stars:5, text:'미친 영화. 살면서 이런 천재의 영화를 볼 수 있다니 행운이다. 3시간동안 난 미래에 있었다' }
+        imdb:'8.7', imdbLink:'https://www.imdb.com/title/tt0816692/',
+        sampleReview:{ nick:'강아지똥', stars:5, text:'미친 영화. 살면서 이런 천재의 영화를 볼 수 있다니 행운이다. 3시간동안 난 미래에 있었다' },
+        s2:{ title:'인터스텔라', tags:[{text:'SF'},{text:'드라마'},{text:'어드벤처'}], tagColor:'#7ec8e3', tagBg:'rgba(126,200,227,0.1)', tagBorder:'rgba(126,200,227,0.4)', runtime:'169분', release:'2014.11', rating:'12세', trailer:'d2VN6NNa9BE', synopsis:'지구 환경이 황폐해진 미래, 전직 NASA 파일럿 쿠퍼는 인류를 구할 새로운 행성을 찾기 위해 웜홀을 통해 우주로 떠난다. 딸 머피에게 돌아오겠다는 약속을 남긴 채.',
+            cast:[{init:'MM',name:'매튜 맥커너히',role:'쿠퍼 역'},{init:'AH',name:'앤 해서웨이',role:'아멜리아 브랜드 역'},{init:'JC',name:'제시카 차스테인',role:'머피(성인) 역'},{init:'MK',name:'마이클 케인',role:'브랜드 교수 역'}],
+            castColor:'#7ec8e3', castBg:'rgba(126,200,227,0.15)',
+            rec:[{emoji:'🌍',title:'마션',sub:'2015 · SF'},{emoji:'🤖',title:'엑스 마키나',sub:'2014 · SF'},{emoji:'🌀',title:'테넷',sub:'2020 · SF'},{emoji:'⏳',title:'어라이벌',sub:'2016 · SF'}]}
     }
 };
 
@@ -524,7 +857,237 @@ function setGenre(e, genre, img, title, desc) {
     starsEl.forEach(s => s.classList.remove('selected','hovered'));
     scoreEl.textContent = '';
     renderSampleReview(genre);
+    updateSection2(genre);
+    playBGM(genre);
 }
+
+function updateSection2(genre) {
+    const d = genreData[genre].s2;
+
+    document.getElementById('s2Title').textContent  = d.title;
+    document.getElementById('s2Runtime').textContent = d.runtime;
+    document.getElementById('s2Release').textContent = d.release;
+    document.getElementById('s2Rating').textContent  = d.rating;
+    document.getElementById('s2Synopsis').textContent = d.synopsis;
+
+    // 태그
+    document.getElementById('s2Tags').innerHTML = d.tags.map(t =>
+        `<span class="s2-tag" style="color:${d.tagColor}; border-color:${d.tagBorder}; background:${d.tagBg};">${t.text}</span>`
+    ).join('');
+
+    // 예고편
+    document.getElementById('s2Trailer').src = `https://www.youtube.com/embed/${d.trailer}`;
+
+    // 출연진 — id 달아서 API로 사진 교체 가능하게
+    document.getElementById('s2Cast').innerHTML = d.cast.map((c, i) => `
+        <div class="s2-cast-item">
+            <div class="s2-cast-avatar" id="castAvatar_${i}" style="background:${d.castBg}; color:${d.castColor}; overflow:hidden;">${c.init}</div>
+            <div><p class="s2-cast-name">${c.name}</p><p class="s2-cast-role">${c.role}</p></div>
+        </div>
+    `).join('');
+
+    // 추천 영화 — id 달아서 API로 포스터 교체 가능하게
+    document.getElementById('s2RecGrid').innerHTML = d.rec.map((r, i) => `
+        <div class="s2-rec-card">
+            <div class="s2-rec-poster" id="recPoster_${i}">${r.emoji}</div>
+            <div class="s2-rec-info"><p class="s2-rec-title">${r.title}</p><p class="s2-rec-sub">${r.sub}</p></div>
+        </div>
+    `).join('');
+
+    // 스틸컷 초기화
+    document.getElementById('s2StillsGrid').innerHTML = `
+        <div class="s2-still"><div class="s2-still-placeholder">🎬</div></div>
+        <div class="s2-still"><div class="s2-still-placeholder">🎬</div></div>
+        <div class="s2-still"><div class="s2-still-placeholder">🎬</div></div>
+    `;
+
+    // TMDB API 호출
+    fetchTMDB(genre, d);
+}
+
+/* ── TMDB API ── */
+const TMDB_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NGY0ZWI0OTdkM2U1MzJkMDIwZWI3NDQ5ZWMxNzA0OSIsIm5iZiI6MTc3OTc3MzY2Mi4wNjYsInN1YiI6IjZhMTUzMGRlY2Y1MjYwNGZlY2MyMWViMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.JHgHvuaLypwKGNscZCVd8brUsz6pXfYP661xDvnMg9w';
+const TMDB_IMG  = 'https://image.tmdb.org/t/p/';
+
+const tmdbIds = {
+    action:  { movie: 575264, rec: [361743, 603692, 872585, 370172], stillOffset: 6 },
+    comedy:  { movie: 1268,   rec: [771,    14340,  245891, 310],    stillOffset: 0 },
+    romance: { movie: 11036,  rec: [175311, 313369, 98,     15846],  stillOffset: 0 },
+    sf:      { movie: 157336, rec: [286217, 264660, 741067, 329865], stillOffset: 0 }
+};
+
+async function fetchTMDB(genre, d) {
+    const id      = tmdbIds[genre].movie;
+    const headers = { Authorization: `Bearer ${TMDB_TOKEN}` };
+
+    try {
+        // 스틸컷 — backdrops만 사용, offset으로 순서 지정
+        const imgRes  = await fetch(`https://api.themoviedb.org/3/movie/${id}/images`, { headers });
+        const imgData = await imgRes.json();
+        const offset  = tmdbIds[genre].stillOffset || 0;
+        const backdrops = (imgData.backdrops || []).filter(b => b.aspect_ratio > 1.5).slice(offset, offset + 3);
+        if (backdrops.length > 0) {
+            document.getElementById('s2StillsGrid').innerHTML = backdrops.map(b =>
+                `<div class="s2-still"><img src="${TMDB_IMG}w780${b.file_path}" style="width:100%;height:100%;object-fit:cover;display:block;"></div>`
+            ).join('');
+        }
+
+        // 배우 사진
+        const castRes  = await fetch(`https://api.themoviedb.org/3/movie/${id}/credits`, { headers });
+        const castData = await castRes.json();
+        d.cast.forEach((c, i) => {
+            const found = (castData.cast || []).find(a =>
+                a.name.toLowerCase().includes(c.name.toLowerCase().split(' ')[0]) ||
+                c.name.toLowerCase().includes(a.name.toLowerCase().split(' ')[0])
+            );
+            if (found?.profile_path) {
+                const el = document.getElementById(`castAvatar_${i}`);
+                if (el) el.innerHTML = `<img src="${TMDB_IMG}w185${found.profile_path}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`;
+            }
+        });
+
+        // 추천 영화 포스터
+        tmdbIds[genre].rec.forEach(async (rid, i) => {
+            try {
+                const recRes  = await fetch(`https://api.themoviedb.org/3/movie/${rid}`, { headers });
+                const recData = await recRes.json();
+                if (recData.poster_path) {
+                    const el = document.getElementById(`recPoster_${i}`);
+                    if (el) {
+                        el.style.fontSize = '0';
+                        el.style.padding  = '0';
+                        el.innerHTML = `<img src="${TMDB_IMG}w342${recData.poster_path}" style="width:100%;height:100%;object-fit:cover;display:block;">`;
+                    }
+                }
+            } catch(e) {}
+        });
+
+    } catch(err) {
+        console.warn('TMDB fetch error:', err);
+    }
+}
+
+// 초기 로드
+updateSection2('action');
+const scrollArrow = document.querySelector('.scroll-arrow');
+window.addEventListener('scroll', () => {
+    const section2Top = document.getElementById('section2').getBoundingClientRect().top;
+    if (section2Top <= window.innerHeight * 0.5) {
+        scrollArrow.style.opacity = '0';
+        scrollArrow.style.pointerEvents = 'none';
+    } else {
+        scrollArrow.style.opacity = '1';
+        scrollArrow.style.pointerEvents = 'auto';
+    }
+});
 </script>
+<!-- ── 두 번째 섹션 ── -->
+<div class="section2" id="section2">
+
+    <div class="s2-header">
+        <div>
+            <h2 class="s2-title" id="s2Title">미션 임파서블: 데드 레코닝</h2>
+            <div class="s2-tags" id="s2Tags">
+                <span class="s2-tag" style="color:#ff2e2e; border-color:rgba(255,46,46,0.4); background:rgba(255,46,46,0.1);">액션</span>
+                <span class="s2-tag" style="color:#ff2e2e; border-color:rgba(255,46,46,0.4); background:rgba(255,46,46,0.1);">스릴러</span>
+                <span class="s2-tag" style="color:#ff2e2e; border-color:rgba(255,46,46,0.4); background:rgba(255,46,46,0.1);">어드벤처</span>
+            </div>
+        </div>
+        <div class="s2-meta">
+            <div class="s2-meta-item">
+                <p class="s2-meta-label">상영시간</p>
+                <p class="s2-meta-val" id="s2Runtime">163분</p>
+            </div>
+            <div class="s2-divider"></div>
+            <div class="s2-meta-item">
+                <p class="s2-meta-label">개봉일</p>
+                <p class="s2-meta-val" id="s2Release">2023.07</p>
+            </div>
+            <div class="s2-divider"></div>
+            <div class="s2-meta-item">
+                <p class="s2-meta-label">관람등급</p>
+                <p class="s2-meta-val" id="s2Rating">12세</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="s2-main">
+        <div class="s2-left">
+            <!-- 예고편 -->
+            <div class="s2-trailer">
+                <iframe id="s2Trailer"
+                    src="https://www.youtube.com/embed/F40MAXyXaac"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <!-- 줄거리 -->
+            <div class="s2-synopsis">
+                <p class="s2-section-label">줄거리</p>
+                <p id="s2Synopsis">에단 헌트는 인류의 미래를 위협하는 강력한 무기를 손에 넣기 위해 전 세계를 누빈다. 그를 둘러싼 모든 것이 위험에 처하게 되고, 세계 각국의 요원들과 치열한 사투를 벌인다.</p>
+            </div>
+        </div>
+
+        <!-- 오른쪽: 출연진 + 스틸컷 + 추천영화 -->
+        <div class="s2-right">
+            <div class="s2-cast">
+                <p class="s2-section-label">출연진</p>
+                <div class="s2-cast-list" id="s2Cast">
+                    <div class="s2-cast-item">
+                        <div class="s2-cast-avatar" style="background:rgba(255,46,46,0.15); color:#ff2e2e;">TC</div>
+                        <div><p class="s2-cast-name">톰 크루즈</p><p class="s2-cast-role">에단 헌트 역</p></div>
+                    </div>
+                    <div class="s2-cast-item">
+                        <div class="s2-cast-avatar" style="background:rgba(255,46,46,0.15); color:#ff2e2e;">HA</div>
+                        <div><p class="s2-cast-name">헤일리 앳웰</p><p class="s2-cast-role">그레이스 역</p></div>
+                    </div>
+                    <div class="s2-cast-item">
+                        <div class="s2-cast-avatar" style="background:rgba(255,46,46,0.15); color:#ff2e2e;">VR</div>
+                        <div><p class="s2-cast-name">빙 래임즈</p><p class="s2-cast-role">루서 스티켈 역</p></div>
+                    </div>
+                    <div class="s2-cast-item">
+                        <div class="s2-cast-avatar" style="background:rgba(255,46,46,0.15); color:#ff2e2e;">SP</div>
+                        <div><p class="s2-cast-name">사이먼 페그</p><p class="s2-cast-role">벤지 던 역</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 스틸컷 -->
+            <div class="s2-stills">
+                <p class="s2-section-label">스틸컷</p>
+                <div class="s2-stills-grid" id="s2StillsGrid">
+                    <div class="s2-still"><div class="s2-still-placeholder">🎬</div></div>
+                    <div class="s2-still"><div class="s2-still-placeholder">🎬</div></div>
+                    <div class="s2-still"><div class="s2-still-placeholder">🎬</div></div>
+                </div>
+            </div>
+
+            <!-- 추천 영화 -->
+            <div class="s2-recommend">
+                <p class="s2-section-label">이 영화를 좋아한다면</p>
+                <div class="s2-rec-grid" id="s2RecGrid">
+                    <div class="s2-rec-card">
+                        <div class="s2-rec-poster">🏍️</div>
+                        <div class="s2-rec-info"><p class="s2-rec-title">탑건: 매버릭</p><p class="s2-rec-sub">2022 · 액션</p></div>
+                    </div>
+                    <div class="s2-rec-card">
+                        <div class="s2-rec-poster">🔫</div>
+                        <div class="s2-rec-info"><p class="s2-rec-title">존 윅 4</p><p class="s2-rec-sub">2023 · 액션</p></div>
+                    </div>
+                    <div class="s2-rec-card">
+                        <div class="s2-rec-poster">💣</div>
+                        <div class="s2-rec-info"><p class="s2-rec-title">오펜하이머</p><p class="s2-rec-sub">2023 · 드라마</p></div>
+                    </div>
+                    <div class="s2-rec-card">
+                        <div class="s2-rec-poster">🕵️</div>
+                        <div class="s2-rec-info"><p class="s2-rec-title">007 노 타임 투 다이</p><p class="s2-rec-sub">2021 · 액션</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 </body>
 </html>
