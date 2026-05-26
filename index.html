@@ -501,29 +501,50 @@ body.comedy .s2-cast{
 body.comedy .s2-cast-name { color:#333; }
 .s2-cast-role{ font-size:11px; color:#555; margin:0; }
 
-/* ── 음소거 버튼 ── */
-.mute-btn{
-    position:fixed;
-    top:22px;
-    right:24px;
-    width:36px;
-    height:36px;
-    border-radius:50%;
-    background:rgba(255,255,255,0.1);
-    border:1px solid rgba(255,255,255,0.2);
-    font-size:16px;
-    cursor:pointer;
-    z-index:9999;
+/* ── BGM 인포 (로고 옆) ── */
+.bgm-info{
     display:flex;
     align-items:center;
-    justify-content:center;
-    transition:background 0.2s;
+    gap:6px;
+    background:rgba(255,255,255,0.08);
+    border:0.5px solid rgba(255,255,255,0.15);
+    border-radius:20px;
+    padding:4px 12px 4px 10px;
 }
-.mute-btn:hover{ background:rgba(255,255,255,0.2); }
-body.comedy .mute-btn{
-    background:rgba(0,0,0,0.08);
-    border-color:rgba(0,0,0,0.15);
+body.comedy .bgm-info{
+    background:rgba(0,0,0,0.06);
+    border-color:rgba(0,0,0,0.12);
 }
+.bgm-icon{
+    font-size:11px;
+    color:rgba(255,255,255,0.6);
+    animation:musicPulse 1.2s ease-in-out infinite;
+}
+body.comedy .bgm-icon{ color:rgba(0,0,0,0.4); }
+@keyframes musicPulse{
+    0%,100%{ opacity:0.4; }
+    50%{ opacity:1; }
+}
+.bgm-title{
+    font-size:11px;
+    color:rgba(255,255,255,0.7);
+    max-width:160px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+body.comedy .bgm-title{ color:rgba(0,0,0,0.5); }
+.mute-btn-inline{
+    background:none;
+    border:none;
+    font-size:13px;
+    cursor:pointer;
+    padding:0;
+    line-height:1;
+    opacity:0.8;
+    transition:opacity 0.2s;
+}
+.mute-btn-inline:hover{ opacity:1; }
 .scroll-arrow{
     position:fixed;
     bottom:160px;
@@ -605,7 +626,14 @@ body.comedy .s2-rec-title { color:#333; }
     <div class="circle"></div>
 
     <header>
-        <div class="logo">🤠💥 ACTION</div>
+        <div style="display:flex; align-items:center; gap:14px;">
+            <div class="logo">🤠💥 ACTION</div>
+            <div class="bgm-info">
+                <span class="bgm-icon">♪</span>
+                <span class="bgm-title" id="bgmTitle">Mission: Impossible OST</span>
+                <button class="mute-btn-inline" id="muteBtn">🔊</button>
+            </div>
+        </div>
         <ul>
             <li><a href="#">현재 상영 중인 영화</a></li>
             <li><a href="#">장르별 영화</a></li>
@@ -658,9 +686,6 @@ body.comedy .s2-rec-title { color:#333; }
 
 </section>
 
-<!-- 음소거 버튼 -->
-<button class="mute-btn" id="muteBtn">🔊</button>
-
 <!-- 플로팅 화살표 -->
 <a class="scroll-arrow" onclick="document.getElementById('section2').scrollIntoView({behavior:'smooth'})">
     <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
@@ -695,6 +720,13 @@ const bgmFiles = {
     sf:      './music/sf.mp3'
 };
 
+const bgmTitles = {
+    action:  'Mission: Impossible OST',
+    comedy:  'Mr. Bean\'s Holiday OST',
+    romance: 'The Notebook OST',
+    sf:      'Interstellar OST'
+};
+
 function playBGM(genre) {
     const newSrc = bgmFiles[genre];
     if (bgm.src.endsWith(newSrc.replace('./', '/'))) return;
@@ -702,6 +734,7 @@ function playBGM(genre) {
     bgm.src  = newSrc;
     bgm.load();
     bgm.play().catch(() => {});
+    document.getElementById('bgmTitle').textContent = bgmTitles[genre];
 }
 
 // 페이지 로드 시 자동재생 — 브라우저 정책상 첫 클릭 이후 재생됨
