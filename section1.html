@@ -223,9 +223,6 @@ body.action { background:#000; }
 body.action .circle{ background-image:url('./imgs/explode.png'); background-size:cover; background-position:center; }
 body.action .imgBox img{ width:420px; filter:contrast(130%) saturate(140%); margin-bottom:60px; }
 body.action .movie-title{ margin-top:60px; }
-@media (max-width:768px){
-    body.action .imgBox img{ margin-bottom:0; }
-}
 body.action .textBox span{ color:#ff2e2e; }
 
 body.comedy { background:#f4f1ea; }
@@ -252,101 +249,6 @@ body.romance .imgBox img { animation:none; }
 body.sf .textBox span { color:#7ec8e3; }
 body.sf .movie-title .title-main { color:#fff; }
 body.sf .movie-title .title-sub  { color:rgba(255,255,255,0.5); }
-
-/* ── 반응형 ── */
-@media (max-width: 768px) {
-
-    /* 섹션: 세로 스택 레이아웃 */
-    section {
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        padding: 80px 20px 160px;
-        gap: 24px;
-        min-height: 100vh;
-    }
-
-    /* 헤더 */
-    header {
-        padding: 14px 20px;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-    header ul {
-        display: none; /* 모바일에서 nav 숨김 */
-    }
-
-    /* 배경 원 */
-    .circle {
-        width: 320px;
-        height: 320px;
-        top: 30%;
-    }
-
-    /* 텍스트박스: 중앙 정렬, 상단 */
-    .textBox {
-        text-align: center;
-        margin-top: 0;
-        width: 100%;
-    }
-    .textBox h2 {
-        font-size: 2.2em;
-        line-height: 1.2;
-    }
-    .textBox p {
-        font-size: 0.85em;
-    }
-
-    /* 포스터: 절대위치 해제, 일반 흐름으로 */
-    .imgBox {
-        position: relative;
-        left: auto;
-        top: auto;
-        transform: none;
-        width: 100%;
-        order: 3;
-    }
-    body.action .imgBox img   { width: 70vw; max-width: 280px; margin-bottom: 0; }
-    body.comedy .imgBox img   { width: 70vw; max-width: 280px; }
-    body.romance .imgBox img  { width: 70vw; max-width: 280px; }
-    body.sf .imgBox img       { width: 60vw; max-width: 240px; }
-
-    .movie-title { margin-top: 10px !important; }
-
-    /* 평점 패널: 중앙 정렬 */
-    .rating-panel {
-        width: 100%;
-        align-items: center;
-        min-width: unset;
-        order: 4;
-    }
-    .stars svg { width: 28px; height: 28px; }
-
-    /* 리뷰 */
-    .review-form { width: 100%; }
-    .review-list { max-height: 100px; }
-
-    /* 썸네일 바 */
-    .thumb {
-        gap: 12px;
-        padding: 8px 16px;
-        width: calc(100% - 32px);
-        justify-content: center;
-    }
-    .thumb li img {
-        height: 64px;
-    }
-}
-
-@media (max-width: 400px) {
-    .textBox h2 { font-size: 1.8em; }
-    body.action .imgBox img,
-    body.comedy .imgBox img,
-    body.romance .imgBox img { width: 80vw; }
-    body.sf .imgBox img { width: 75vw; }
-    .thumb li img { height: 52px; }
-    .stars svg { width: 24px; height: 24px; }
-}
 </style>
 </head>
 
